@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - INVENTRA</title>
+    <link rel="shortcut icon" href="../../assets/landing/img/logo.png">
+    <link rel="stylesheet" href="../../assets/landing/css/all.css">
+    <!-- <link rel="stylesheet" href="assets/landing/css/styles-box.css"> -->
+    <!-- <link rel="stylesheet" href="assets/landing/css/styles-flexbox.css"> -->
+    <link rel="stylesheet" href="../../assets/landing/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../assets/dashboard/css/styles-dashboard.css">
+</head>
+
+<body>
+    <div class="container-lg .container-fluid-md contenedor" id="contenedor">
+
+        <!-- Navegador -->
+        <nav id="navegador" class="navbar sticky-top navbar-expand-lg bg-body-tertiary position-sticky">
+            <div class="container-fluid">
+                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
+                    data-bs-target="#sidebarOffcanvas" aria-controls="sidebarOffcanvas" aria-label="Abrir menú">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <a class="navbar-brand d-flex align-items-center gap-2" href="admin.html">
+                    <span class="brand-icon"><i class="fa-solid fa-bolt"></i></span>
+                    INVENTRA
+                </a>
+                <div class="d-flex align-items-center gap-3 ms-auto">
+                    <button class="btn btn-link icon-btn" type="button" aria-label="Notificaciones">
+                        <i class="fa-regular fa-bell"></i>
+                        <span class="notif-dot"></span>
+                    </button>
+                    <div class="dropdown">
+                        <a class="d-flex align-items-center gap-2 text-decoration-none dropdown-toggle" href="#"
+                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="user-avatar">AM</span>
+                            <span class="d-none d-sm-inline user-name">Aristides</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="#">Mi perfil</a></li>
+                            <li><a class="dropdown-item" href="#">Configuración</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="../../index.html">Cerrar sesión</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <div class="dashboard-body">
+
+            <!-- Barra Lateral -->
+            <div class="offcanvas-lg offcanvas-start sidebar" tabindex="-1" id="sidebarOffcanvas"
+                aria-labelledby="sidebarOffcanvasLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="sidebarOffcanvasLabel">Menú</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
+                        data-bs-target="#sidebarOffcanvas" aria-label="Cerrar"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <nav class="sidebar-nav">
+                        <p class="nav-section-title">Principal</p>
+                        <ul class="nav flex-column">
+                            <li class="nav-item"><a class="nav-link active" href="admin.html"><i
+                                        class="fa-solid fa-grip"></i> Dashboard</a></li>
+                        </ul>
+
+                        <p class="nav-section-title">Inventario</p>
+                        <ul class="nav flex-column">
+                            <li class="nav-item"><a class="nav-link" href="#"><i
+                                        class="fa-solid fa-boxes-stacked"></i> Inventario</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#"><i class="fa-solid fa-arrow-down"></i>
+                                    Entradas</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#"><i class="fa-solid fa-arrow-up"></i>
+                                    Salidas</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#"><i class="fa-solid fa-tags"></i>
+                                    Categorías</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#"><i class="fa-solid fa-truck"></i>
+                                    Proveedores</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#"><i
+                                        class="fa-solid fa-chart-column"></i> Reportes</a></li>
+                        </ul>
+
+                        <p class="nav-section-title">Gestión</p>
+                        <ul class="nav flex-column">
+                            <li class="nav-item"><a class="nav-link" href="#"><i class="fa-solid fa-users"></i>
+                                    Usuarios</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#"><i
+                                        class="fa-solid fa-cash-register"></i> Caja</a></li>
+                        </ul>
+
+                        <p class="nav-section-title">Sistema</p>
+                        <ul class="nav flex-column">
+                            <li class="nav-item"><a class="nav-link" href="#"><i class="fa-solid fa-gear"></i>
+                                    Configuración</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+
+            <!-- Contenido Principal -->
+            <main class="dashboard-main">
+
+                <!-- Encabezado -->
+                <section class="row saludo">
+                    <div class="col">
+                        <h2 class="greeting-title">Hola, Aristides <span class="wave">👋</span></h2>
+                        <p class="greeting-sub">Rol: Administrador · <span id="today-date"></span></p>
+                    </div>
+                    <div class="col-auto d-flex align-items-start gap-2">
+                        <button class="btn btn-outline-action"><i class="fa-solid fa-download"></i> Exportar</button>
+                        <button class="btn btn-primary-action" id="refreshBtn"><i
+                                class="fa-solid fa-arrows-rotate"></i> Actualizar</button>
+                    </div>
+                </section>
+
+                <!-- Indicadores -->
+                <div id="indicadores" class="tope"></div>
+                <section class="row g-3 kpi-row">
+                    <div class="col-6 col-xl-3">
+                        <div class="kpi-card">
+                            <div class="kpi-top">
+                                <span class="kpi-label">Valor de Inventario</span>
+                                <span class="kpi-icon icon-green"><i class="fa-solid fa-boxes-packing"></i></span>
+                            </div>
+                            <div class="kpi-value">$ 24.945.000</div>
+                            <div class="kpi-foot">
+                                <span class="kpi-note">8 productos</span>
+                                <span class="kpi-trend trend-up"><i class="fa-solid fa-arrow-trend-up"></i>
+                                    +8.2%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-6 col-xl-3">
+                        <div class="kpi-card">
+                            <div class="kpi-top">
+                                <span class="kpi-label">Ventas del Día</span>
+                                <span class="kpi-icon icon-blue"><i class="fa-solid fa-cart-shopping"></i></span>
+                            </div>
+                            <div class="kpi-value">$ 2.935.000</div>
+                            <div class="kpi-foot">
+                                <span class="kpi-note">3 transacciones</span>
+                                <span class="kpi-trend trend-up"><i class="fa-solid fa-arrow-trend-up"></i>
+                                    +12.5%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-6 col-xl-3">
+                        <div class="kpi-card">
+                            <div class="kpi-top">
+                                <span class="kpi-label">Alertas de Stock</span>
+                                <span class="kpi-icon icon-amber"><i
+                                        class="fa-solid fa-triangle-exclamation"></i></span>
+                            </div>
+                            <div class="kpi-value">4 bajo · 1 agotado</div>
+                            <div class="kpi-foot">
+                                <span class="kpi-note">Requiere atención</span>
+                                <span class="kpi-trend trend-down"><i class="fa-solid fa-arrow-trend-down"></i>
+                                    Revisar</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-6 col-xl-3">
+                        <div class="kpi-card">
+                            <div class="kpi-top">
+                                <span class="kpi-label">Usuarios Activos</span>
+                                <span class="kpi-icon icon-purple"><i class="fa-solid fa-user-group"></i></span>
+                            </div>
+                            <div class="kpi-value">4 / 5</div>
+                            <div class="kpi-foot">
+                                <span class="kpi-note">En línea ahora</span>
+                                <span class="kpi-trend trend-up"><i class="fa-solid fa-arrow-trend-up"></i>
+                                    Estable</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Gráficos -->
+                <div id="graficos" class="tope"></div>
+                <section class="row g-3 charts-row">
+                    <div class="col-lg-8">
+                        <div class="panel">
+                            <div class="panel-head">
+                                <h3>Ventas vs Compras <span class="dot-sep">·</span> Semana actual</h3>
+                                <span class="currency-badge">COP</span>
+                            </div>
+                            <div class="chart-wrap">
+                                <canvas id="salesChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="panel h-100">
+                            <div class="panel-head">
+                                <h3>Stock por Categoría</h3>
+                            </div>
+                            <div class="pie-wrap">
+                                <canvas id="stockChart"></canvas>
+                            </div>
+                            <ul class="legend-list">
+                                <li><span class="legend-dot" style="background:#22c58b"></span>Tarjetas Gráficas
+                                    <b>15</b>
+                                </li>
+                                <li><span class="legend-dot" style="background:#3b82f6"></span>Almacenamiento
+                                    <b>25</b>
+                                </li>
+                                <li><span class="legend-dot" style="background:#f59e0b"></span>Periféricos <b>14</b>
+                                </li>
+                                <li><span class="legend-dot" style="background:#a855f7"></span>Otros <b>8</b></li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Transacciones y Acceso Rápido -->
+                <div id="transacciones" class="tope"></div>
+                <section class="row g-3 bottom-row">
+                    <div class="col-lg-8">
+                        <div class="panel">
+                            <div class="panel-head">
+                                <h3>Últimas transacciones</h3>
+                                <a href="#" class="see-link">Ver caja <i class="fa-solid fa-chevron-right"></i></a>
+                            </div>
+                            <ul class="txn-list" id="txnList"></ul>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="panel h-100">
+                            <div class="panel-head">
+                                <h3>Acceso rápido</h3>
+                            </div>
+                            <div class="quick-grid">
+                                <a href="#" class="quick-item">
+                                    <span class="quick-icon icon-green"><i class="fa-solid fa-cube"></i></span>
+                                    Inventario
+                                </a>
+                                <a href="#" class="quick-item">
+                                    <span class="quick-icon icon-purple"><i class="fa-solid fa-user-group"></i></span>
+                                    Usuarios
+                                </a>
+                                <a href="#" class="quick-item">
+                                    <span class="quick-icon icon-amber"><i class="fa-solid fa-folder-open"></i></span>
+                                    Caja
+                                </a>
+                                <a href="#" class="quick-item">
+                                    <span class="quick-icon icon-blue"><i class="fa-solid fa-chart-simple"></i></span>
+                                    Reportes
+                                </a>
+                            </div>
+
+                            <div class="alert-banner">
+                                <i class="fa-solid fa-triangle-exclamation"></i>
+                                <span><b>Alertas</b> · 4 productos con stock bajo y 1 agotado requieren tu
+                                    revisión.</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </main>
+        </div>
+
+        <!-- Pie de Página -->
+        <footer class="row footer-dashboard">
+            <p class="text-center mb-0">© 2026 INVENTRA · ING Sistemas</p>
+        </footer>
+    </div>
+
+    <script src="../../assets/landing/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.4/chart.umd.min.js"></script>
+    <script src="../../assets/dashboard/js/scripts.js"></script>
+</body>
+
+</html>

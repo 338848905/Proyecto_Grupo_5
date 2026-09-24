@@ -1,284 +1,704 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard - INVENTRA</title>
-    <link rel="shortcut icon" href="../../assets/landing/img/logo.png">
-    <link rel="stylesheet" href="../../assets/landing/css/all.css">
-    <!-- <link rel="stylesheet" href="assets/landing/css/styles-box.css"> -->
-    <!-- <link rel="stylesheet" href="assets/landing/css/styles-flexbox.css"> -->
-    <link rel="stylesheet" href="../../assets/landing/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../../assets/dashboard/css/styles-dashboard.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>INVENTRA · Prototipo</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   INVENTRA · Prototipo unificado (login + dashboard)
+   ============================================================ */
+
+:root {
+    --brand: #1D9E75;
+    --brand-dark: #157a5b;
+    --sidebar-bg: #0b2019;
+    --page-bg: #f4f8f6;
+    --card-bg: #ffffff;
+    --border: #e6ece9;
+    --text-main: #16211c;
+    --text-mute: #6b7b74;
+    --blue: #3b82f6;
+    --amber: #f59e0b;
+    --purple: #a855f7;
+    --red: #ef4444;
+    --radius: 14px;
+}
+
+html, body { height: 100%; }
+
+body {
+    margin: 0;
+    background: var(--page-bg);
+    color: var(--text-main);
+    font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+/* ============================================================
+   VISTA: LOGIN
+   ============================================================ */
+#view-login { min-height: 100vh; }
+.login-row { min-height: 100vh; margin: 0; }
+
+.panel-marca {
+    background: linear-gradient(160deg, var(--sidebar-bg), #123a2c 70%, var(--brand-dark));
+    color: #d7e6df;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 2.5rem 2.5rem 1.5rem;
+    min-height: 100vh;
+}
+.marca-top { display: flex; align-items: center; gap: .7rem; }
+.brand-icon {
+    width: 34px; height: 34px; border-radius: 9px;
+    background: var(--brand); color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-size: .95rem; flex-shrink: 0;
+}
+.brand-text { display: flex; flex-direction: column; line-height: 1.1; }
+.brand-name { font-weight: 800; color: #fff; font-size: 1.05rem; letter-spacing: .2px; }
+.brand-sub { font-size: .68rem; color: #7d9089; margin-top: 2px; }
+.marca-cuerpo { margin: 2.5rem 0; }
+.marca-titulo { font-size: 1.9rem; font-weight: 800; color: #fff; line-height: 1.2; margin-bottom: 1rem; }
+.marca-sub { font-size: .92rem; color: #a9bab2; line-height: 1.5; margin-bottom: 2rem; }
+.feature-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 1.1rem; }
+.feature-list li { display: flex; align-items: center; gap: .8rem; font-size: .9rem; font-weight: 500; color: #e3ede8; }
+.feature-icon {
+    width: 34px; height: 34px; border-radius: 9px;
+    background: rgba(255,255,255,.08); color: var(--brand);
+    display: flex; align-items: center; justify-content: center;
+    font-size: .85rem; flex-shrink: 0;
+}
+.marca-footer { font-size: .75rem; color: #6f8279; margin: 0; }
+
+.panel-form { display: flex; align-items: center; justify-content: center; padding: 2.5rem 1.5rem; background: #fbfdfc; }
+.form-wrap { width: 100%; max-width: 420px; }
+.form-titulo { font-size: 1.5rem; font-weight: 800; margin-bottom: .3rem; }
+.form-sub { font-size: .88rem; color: var(--text-mute); margin-bottom: 1.75rem; }
+.form-label { font-size: .85rem; font-weight: 600; color: var(--text-main); }
+.input-icon-wrap { position: relative; display: flex; align-items: center; }
+.input-icon { position: absolute; left: .9rem; color: var(--text-mute); font-size: .9rem; pointer-events: none; }
+.input-icon-wrap .form-control {
+    padding-left: 2.4rem; background: var(--page-bg);
+    border: 1px solid var(--border); border-radius: 10px;
+    font-size: .88rem; padding-top: .6rem; padding-bottom: .6rem;
+}
+.input-icon-wrap .form-control:focus { border-color: var(--brand); box-shadow: 0 0 0 .18rem rgba(29,158,117,.15); }
+.btn-toggle-pass { position: absolute; right: .8rem; background: none; border: 0; color: var(--text-mute); font-size: .9rem; }
+.opciones-row { font-size: .85rem; }
+.form-check-label { color: var(--text-mute); font-size: .85rem; }
+.link-olvide, .link-registro { color: var(--brand); font-weight: 600; text-decoration: none; font-size: .85rem; }
+.link-olvide:hover, .link-registro:hover { text-decoration: underline; }
+.btn-login {
+    background: var(--brand); color: #fff; font-weight: 700; font-size: .92rem;
+    padding: .7rem 1rem; border-radius: 10px; border: 0;
+    display: flex; align-items: center; justify-content: center; gap: .5rem;
+}
+.btn-login:hover { background: var(--brand-dark); color: #fff; }
+.registro-txt { font-size: .85rem; color: var(--text-mute); margin: 1.1rem 0 0; }
+
+.demo-box { margin-top: 1.75rem; background: var(--page-bg); border: 1px solid var(--border); border-radius: 12px; padding: 1rem 1.1rem; }
+.demo-titulo { font-size: .72rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--text-mute); margin-bottom: .6rem; }
+.demo-item { width: 100%; background: none; border: 0; display: flex; align-items: center; justify-content: space-between; gap: .5rem; font-size: .8rem; color: var(--text-main); padding: .35rem 0; text-align: left; }
+.demo-item:hover { color: var(--brand); }
+.demo-clave { color: var(--text-mute); font-family: monospace; font-size: .78rem; }
+.demo-rol { color: var(--text-mute); font-family: "Inter", sans-serif; }
+
+.btn-ayuda {
+    position: fixed; right: 1.25rem; bottom: 1.25rem;
+    width: 40px; height: 40px; border-radius: 50%;
+    background: var(--text-main); color: #fff; border: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem; box-shadow: 0 4px 10px rgba(0,0,0,.15);
+}
+
+@media (max-width: 991.98px) {
+    .panel-marca { min-height: auto; padding: 2rem 1.5rem; }
+    .marca-cuerpo { margin: 1.5rem 0; }
+    .marca-titulo { font-size: 1.5rem; }
+}
+
+/* ============================================================
+   VISTA: DASHBOARD
+   ============================================================ */
+#navegador { padding: .6rem 1.25rem; border-bottom: 1px solid var(--border); background: #fff; }
+#navegador .navbar-brand { font-weight: 800; color: var(--text-main); }
+.icon-btn { position: relative; color: var(--text-mute); font-size: 1.05rem; padding: 0 .3rem; }
+.notif-dot { position: absolute; top: -2px; right: -2px; width: 7px; height: 7px; border-radius: 50%; background: var(--red); }
+.user-avatar {
+    width: 32px; height: 32px; border-radius: 50%;
+    background: var(--brand); color: #fff;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: .78rem;
+}
+.user-name { font-size: .85rem; font-weight: 600; color: var(--text-main); }
+
+.dashboard-body { display: flex; align-items: flex-start; min-height: calc(100vh - 64px); }
+
+.sidebar { --bs-offcanvas-width: 250px; background: var(--sidebar-bg); color: #c9d6cf; }
+.sidebar .offcanvas-header { border-bottom: 1px solid rgba(255,255,255,.08); }
+.sidebar .offcanvas-title { color: #fff; font-size: .95rem; }
+@media (min-width: 992px) { .sidebar .offcanvas-header { display: none; } }
+
+.sidebar-nav { padding: .5rem; }
+.nav-section-title { font-size: .68rem; font-weight: 600; color: #5c6f66; margin: 1rem .5rem .35rem; letter-spacing: .04em; text-transform: uppercase; }
+.nav-section-title:first-child { margin-top: .2rem; }
+.sidebar-nav .nav-link { display: flex; align-items: center; gap: .7rem; color: #a9bab2; font-size: .87rem; font-weight: 500; padding: .55rem .65rem; border-radius: 9px; margin-bottom: .15rem; }
+.sidebar-nav .nav-link i { width: 16px; text-align: center; font-size: .85rem; color: #7d9089; }
+.sidebar-nav .nav-link:hover { background: rgba(255,255,255,.05); color: #fff; }
+.sidebar-nav .nav-link.active { background: var(--brand); color: #fff; }
+.sidebar-nav .nav-link.active i { color: #fff; }
+
+.dashboard-main { flex: 1; min-width: 0; padding: 1.4rem 1.5rem 2.5rem; }
+
+.saludo { align-items: flex-end; margin-bottom: 1.25rem; row-gap: .9rem; }
+.greeting-title { font-size: 1.35rem; font-weight: 800; margin: 0 0 .2rem; }
+.greeting-sub { font-size: .85rem; color: var(--text-mute); margin: 0; }
+.btn-outline-action { border: 1px solid var(--border); background: #fff; color: var(--text-main); font-size: .82rem; font-weight: 600; padding: .5rem 1rem; border-radius: 9px; }
+.btn-outline-action:hover { background: var(--page-bg); }
+.btn-primary-action { border: 0; background: var(--brand); color: #fff; font-size: .82rem; font-weight: 600; padding: .5rem 1.1rem; border-radius: 9px; }
+.btn-primary-action:hover { background: var(--brand-dark); color: #fff; }
+
+.kpi-row { margin-top: .2rem; }
+.kpi-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.15rem; height: 100%; }
+.kpi-top { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: .7rem; }
+.kpi-label { font-size: .78rem; color: var(--text-mute); font-weight: 500; }
+.kpi-icon { width: 32px; height: 32px; border-radius: 9px; display: flex; align-items: center; justify-content: center; font-size: .85rem; }
+.icon-green { background: #e3f7ef; color: var(--brand); }
+.icon-blue { background: #e6f0ff; color: var(--blue); }
+.icon-amber { background: #fef3e2; color: var(--amber); }
+.icon-purple { background: #f3e8ff; color: var(--purple); }
+.kpi-value { font-size: 1.35rem; font-weight: 800; margin-bottom: .5rem; }
+.kpi-foot { display: flex; align-items: center; justify-content: space-between; font-size: .75rem; }
+.kpi-note { color: var(--text-mute); }
+.kpi-trend { font-weight: 600; display: flex; align-items: center; gap: 4px; }
+.trend-up { color: var(--brand); }
+.trend-down { color: var(--amber); }
+
+.charts-row { margin-top: 1.1rem; }
+.bottom-row { margin-top: .3rem; }
+.panel { background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.15rem 1.25rem; }
+.panel-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; }
+.panel-head h3 { font-size: .95rem; font-weight: 700; margin: 0; }
+.dot-sep { color: var(--text-mute); font-weight: 400; }
+.currency-badge { font-size: .72rem; font-weight: 600; background: var(--page-bg); color: var(--text-mute); padding: 2px 9px; border-radius: 6px; }
+.chart-wrap { height: 280px; position: relative; }
+.pie-wrap { height: 180px; position: relative; margin-bottom: .9rem; }
+.legend-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: .55rem; }
+.legend-list li { display: flex; align-items: center; gap: .5rem; font-size: .82rem; color: var(--text-mute); }
+.legend-list li b { margin-left: auto; color: var(--text-main); font-weight: 700; }
+.legend-dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+.see-link { font-size: .8rem; color: var(--brand); font-weight: 600; text-decoration: none; }
+.see-link:hover { text-decoration: underline; }
+
+.txn-list { list-style: none; margin: 0; padding: 0; }
+.txn-item { display: flex; align-items: center; gap: .85rem; padding: .75rem 0; border-bottom: 1px solid var(--border); }
+.txn-item:last-child { border-bottom: 0; padding-bottom: 0; }
+.txn-icon { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: .85rem; flex-shrink: 0; }
+.txn-icon.in { background: #e3f7ef; color: var(--brand); }
+.txn-icon.out { background: #fde8e8; color: var(--red); }
+.txn-main { flex: 1; min-width: 0; }
+.txn-title { font-size: .85rem; font-weight: 600; margin: 0; }
+.txn-sub { font-size: .75rem; color: var(--text-mute); margin: 0; }
+.txn-amounts { text-align: right; }
+.txn-amount { font-size: .85rem; font-weight: 700; }
+.txn-amount.pos { color: var(--brand); }
+.txn-amount.neg { color: var(--red); }
+.txn-code { font-size: .7rem; color: var(--text-mute); }
+
+.quick-grid { display: grid; grid-template-columns: 1fr 1fr; gap: .7rem; margin-bottom: 1rem; }
+.quick-item { border: 1px solid var(--border); border-radius: 12px; padding: 1rem .6rem; display: flex; flex-direction: column; align-items: center; gap: .5rem; font-size: .78rem; font-weight: 600; color: var(--text-main); text-decoration: none; }
+.quick-item:hover { border-color: var(--brand); background: #f4fbf8; color: var(--text-main); }
+.quick-icon { width: 36px; height: 36px; border-radius: 9px; display: flex; align-items: center; justify-content: center; font-size: .95rem; }
+.alert-banner { display: flex; gap: .6rem; align-items: flex-start; background: #fef3e2; color: #92661a; border-radius: 10px; padding: .75rem .85rem; font-size: .78rem; line-height: 1.35; }
+.alert-banner i { margin-top: 2px; }
+
+.footer-dashboard { padding: 1rem; border-top: 1px solid var(--border); color: var(--text-mute); font-size: .8rem; }
+
+@media (max-width: 575.98px) {
+    .dashboard-main { padding: 1.1rem 1rem 2rem; }
+    .kpi-value { font-size: 1.15rem; }
+}
+</style>
 </head>
 
 <body>
-    <div class="container-lg .container-fluid-md contenedor" id="contenedor">
 
-        <!-- Navegador -->
-        <nav id="navegador" class="navbar sticky-top navbar-expand-lg bg-body-tertiary position-sticky">
-            <div class="container-fluid">
-                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
-                    data-bs-target="#sidebarOffcanvas" aria-controls="sidebarOffcanvas" aria-label="Abrir menú">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <a class="navbar-brand d-flex align-items-center gap-2" href="admin.html">
+<!-- ======================================================
+     VISTA 1: LOGIN
+     ====================================================== -->
+<div id="view-login">
+    <div class="container-fluid">
+        <div class="row login-row">
+
+            <div class="col-lg-5 col-xl-4 panel-marca">
+                <div class="marca-top">
                     <span class="brand-icon"><i class="fa-solid fa-bolt"></i></span>
-                    INVENTRA
-                </a>
-                <div class="d-flex align-items-center gap-3 ms-auto">
-                    <button class="btn btn-link icon-btn" type="button" aria-label="Notificaciones">
-                        <i class="fa-regular fa-bell"></i>
-                        <span class="notif-dot"></span>
-                    </button>
-                    <div class="dropdown">
-                        <a class="d-flex align-items-center gap-2 text-decoration-none dropdown-toggle" href="#"
-                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <span class="user-avatar">AM</span>
-                            <span class="d-none d-sm-inline user-name">Aristides</span>
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end">
-                            <li><a class="dropdown-item" href="#">Mi perfil</a></li>
-                            <li><a class="dropdown-item" href="#">Configuración</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="../../index.html">Cerrar sesión</a></li>
-                        </ul>
+                    <div class="brand-text">
+                        <span class="brand-name">INVENTRA</span>
+                        <span class="brand-sub">v2.4.1 · ING Sistemas</span>
                     </div>
                 </div>
-            </div>
-        </nav>
 
-        <div class="dashboard-body">
-
-            <!-- Barra Lateral -->
-            <div class="offcanvas-lg offcanvas-start sidebar" tabindex="-1" id="sidebarOffcanvas"
-                aria-labelledby="sidebarOffcanvasLabel">
-                <div class="offcanvas-header">
-                    <h5 class="offcanvas-title" id="sidebarOffcanvasLabel">Menú</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
-                        data-bs-target="#sidebarOffcanvas" aria-label="Cerrar"></button>
+                <div class="marca-cuerpo">
+                    <h1 class="marca-titulo">Gestión de inventario inteligente</h1>
+                    <p class="marca-sub">Control total de tu inventario, caja y equipo desde una sola plataforma
+                        diseñada para empresas en crecimiento.</p>
+                    <ul class="feature-list">
+                        <li><span class="feature-icon"><i class="fa-solid fa-arrows-rotate"></i></span>Inventario en tiempo real</li>
+                        <li><span class="feature-icon"><i class="fa-solid fa-user-group"></i></span>Gestión de usuarios y roles</li>
+                        <li><span class="feature-icon"><i class="fa-solid fa-cash-register"></i></span>Control completo de caja</li>
+                        <li><span class="feature-icon"><i class="fa-solid fa-chart-column"></i></span>Reportes y métricas detalladas</li>
+                    </ul>
                 </div>
-                <div class="offcanvas-body">
-                    <nav class="sidebar-nav">
-                        <p class="nav-section-title">Principal</p>
-                        <ul class="nav flex-column">
-                            <li class="nav-item"><a class="nav-link active" href="admin.html"><i
-                                        class="fa-solid fa-grip"></i> Dashboard</a></li>
-                        </ul>
 
-                        <p class="nav-section-title">Inventario</p>
-                        <ul class="nav flex-column">
-                            <li class="nav-item"><a class="nav-link" href="#"><i
-                                        class="fa-solid fa-boxes-stacked"></i> Inventario</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#"><i class="fa-solid fa-arrow-down"></i>
-                                    Entradas</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#"><i class="fa-solid fa-arrow-up"></i>
-                                    Salidas</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#"><i class="fa-solid fa-tags"></i>
-                                    Categorías</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#"><i class="fa-solid fa-truck"></i>
-                                    Proveedores</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#"><i
-                                        class="fa-solid fa-chart-column"></i> Reportes</a></li>
-                        </ul>
-
-                        <p class="nav-section-title">Gestión</p>
-                        <ul class="nav flex-column">
-                            <li class="nav-item"><a class="nav-link" href="#"><i class="fa-solid fa-users"></i>
-                                    Usuarios</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#"><i
-                                        class="fa-solid fa-cash-register"></i> Caja</a></li>
-                        </ul>
-
-                        <p class="nav-section-title">Sistema</p>
-                        <ul class="nav flex-column">
-                            <li class="nav-item"><a class="nav-link" href="#"><i class="fa-solid fa-gear"></i>
-                                    Configuración</a></li>
-                        </ul>
-                    </nav>
-                </div>
+                <p class="marca-footer">© 2026 ING Sistemas · Santa Marta, Colombia</p>
             </div>
 
-            <!-- Contenido Principal -->
-            <main class="dashboard-main">
+            <div class="col-lg-7 col-xl-8 panel-form">
+                <div class="form-wrap">
+                    <h2 class="form-titulo">Bienvenido de nuevo</h2>
+                    <p class="form-sub">Ingresa tus credenciales para continuar</p>
 
-                <!-- Encabezado -->
-                <section class="row saludo">
-                    <div class="col">
-                        <h2 class="greeting-title">Hola, Aristides <span class="wave">👋</span></h2>
-                        <p class="greeting-sub">Rol: Administrador · <span id="today-date"></span></p>
-                    </div>
-                    <div class="col-auto d-flex align-items-start gap-2">
-                        <button class="btn btn-outline-action"><i class="fa-solid fa-download"></i> Exportar</button>
-                        <button class="btn btn-primary-action" id="refreshBtn"><i
-                                class="fa-solid fa-arrows-rotate"></i> Actualizar</button>
-                    </div>
-                </section>
-
-                <!-- Indicadores -->
-                <div id="indicadores" class="tope"></div>
-                <section class="row g-3 kpi-row">
-                    <div class="col-6 col-xl-3">
-                        <div class="kpi-card">
-                            <div class="kpi-top">
-                                <span class="kpi-label">Valor de Inventario</span>
-                                <span class="kpi-icon icon-green"><i class="fa-solid fa-boxes-packing"></i></span>
-                            </div>
-                            <div class="kpi-value">$ 24.945.000</div>
-                            <div class="kpi-foot">
-                                <span class="kpi-note">8 productos</span>
-                                <span class="kpi-trend trend-up"><i class="fa-solid fa-arrow-trend-up"></i>
-                                    +8.2%</span>
+                    <form id="loginForm" novalidate>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Correo electrónico</label>
+                            <div class="input-icon-wrap">
+                                <i class="fa-regular fa-envelope input-icon"></i>
+                                <input type="email" class="form-control" id="email" name="email" placeholder="admin@ingsistemas.co" required>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="col-6 col-xl-3">
-                        <div class="kpi-card">
-                            <div class="kpi-top">
-                                <span class="kpi-label">Ventas del Día</span>
-                                <span class="kpi-icon icon-blue"><i class="fa-solid fa-cart-shopping"></i></span>
-                            </div>
-                            <div class="kpi-value">$ 2.935.000</div>
-                            <div class="kpi-foot">
-                                <span class="kpi-note">3 transacciones</span>
-                                <span class="kpi-trend trend-up"><i class="fa-solid fa-arrow-trend-up"></i>
-                                    +12.5%</span>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Contraseña</label>
+                            <div class="input-icon-wrap">
+                                <i class="fa-solid fa-lock input-icon"></i>
+                                <input type="password" class="form-control" id="password" name="password" placeholder="••••••••" required>
+                                <button type="button" class="btn-toggle-pass" id="togglePass" aria-label="Mostrar contraseña">
+                                    <i class="fa-regular fa-eye"></i>
+                                </button>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="col-6 col-xl-3">
-                        <div class="kpi-card">
-                            <div class="kpi-top">
-                                <span class="kpi-label">Alertas de Stock</span>
-                                <span class="kpi-icon icon-amber"><i
-                                        class="fa-solid fa-triangle-exclamation"></i></span>
+                        <div class="d-flex align-items-center justify-content-between mb-3 opciones-row">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="recordarme">
+                                <label class="form-check-label" for="recordarme">Recordarme</label>
                             </div>
-                            <div class="kpi-value">4 bajo · 1 agotado</div>
-                            <div class="kpi-foot">
-                                <span class="kpi-note">Requiere atención</span>
-                                <span class="kpi-trend trend-down"><i class="fa-solid fa-arrow-trend-down"></i>
-                                    Revisar</span>
-                            </div>
+                            <a href="#" class="link-olvide">Olvidé mi contraseña</a>
                         </div>
-                    </div>
 
-                    <div class="col-6 col-xl-3">
-                        <div class="kpi-card">
-                            <div class="kpi-top">
-                                <span class="kpi-label">Usuarios Activos</span>
-                                <span class="kpi-icon icon-purple"><i class="fa-solid fa-user-group"></i></span>
-                            </div>
-                            <div class="kpi-value">4 / 5</div>
-                            <div class="kpi-foot">
-                                <span class="kpi-note">En línea ahora</span>
-                                <span class="kpi-trend trend-up"><i class="fa-solid fa-arrow-trend-up"></i>
-                                    Estable</span>
-                            </div>
+                        <button type="submit" class="btn btn-login w-100">
+                            Iniciar sesión <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+
+                        <p class="text-center registro-txt">
+                            ¿No tienes cuenta? <a href="#" class="link-registro">Regístrate</a>
+                        </p>
+
+                        <div class="demo-box">
+                            <p class="demo-titulo">Cuentas de demo</p>
+                            <button type="button" class="demo-item" data-email="admin@ingsistemas.co" data-password="admin123">
+                                <span>admin@ingsistemas.co</span>
+                                <span class="demo-clave">admin123 <span class="demo-rol">(Administrador)</span></span>
+                            </button>
+                            <button type="button" class="demo-item" data-email="vendedor@ingsistemas.co" data-password="vend123">
+                                <span>vendedor@ingsistemas.co</span>
+                                <span class="demo-clave">vend123 <span class="demo-rol">(Vendedor)</span></span>
+                            </button>
+                            <button type="button" class="demo-item" data-email="cajero@ingsistemas.co" data-password="caja123">
+                                <span>cajero@ingsistemas.co</span>
+                                <span class="demo-clave">caja123 <span class="demo-rol">(Cajero)</span></span>
+                            </button>
                         </div>
-                    </div>
-                </section>
+                    </form>
+                </div>
+            </div>
 
-                <!-- Gráficos -->
-                <div id="graficos" class="tope"></div>
-                <section class="row g-3 charts-row">
-                    <div class="col-lg-8">
-                        <div class="panel">
-                            <div class="panel-head">
-                                <h3>Ventas vs Compras <span class="dot-sep">·</span> Semana actual</h3>
-                                <span class="currency-badge">COP</span>
-                            </div>
-                            <div class="chart-wrap">
-                                <canvas id="salesChart"></canvas>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4">
-                        <div class="panel h-100">
-                            <div class="panel-head">
-                                <h3>Stock por Categoría</h3>
-                            </div>
-                            <div class="pie-wrap">
-                                <canvas id="stockChart"></canvas>
-                            </div>
-                            <ul class="legend-list">
-                                <li><span class="legend-dot" style="background:#22c58b"></span>Tarjetas Gráficas
-                                    <b>15</b>
-                                </li>
-                                <li><span class="legend-dot" style="background:#3b82f6"></span>Almacenamiento
-                                    <b>25</b>
-                                </li>
-                                <li><span class="legend-dot" style="background:#f59e0b"></span>Periféricos <b>14</b>
-                                </li>
-                                <li><span class="legend-dot" style="background:#a855f7"></span>Otros <b>8</b></li>
-                            </ul>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Transacciones y Acceso Rápido -->
-                <div id="transacciones" class="tope"></div>
-                <section class="row g-3 bottom-row">
-                    <div class="col-lg-8">
-                        <div class="panel">
-                            <div class="panel-head">
-                                <h3>Últimas transacciones</h3>
-                                <a href="#" class="see-link">Ver caja <i class="fa-solid fa-chevron-right"></i></a>
-                            </div>
-                            <ul class="txn-list" id="txnList"></ul>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4">
-                        <div class="panel h-100">
-                            <div class="panel-head">
-                                <h3>Acceso rápido</h3>
-                            </div>
-                            <div class="quick-grid">
-                                <a href="#" class="quick-item">
-                                    <span class="quick-icon icon-green"><i class="fa-solid fa-cube"></i></span>
-                                    Inventario
-                                </a>
-                                <a href="#" class="quick-item">
-                                    <span class="quick-icon icon-purple"><i class="fa-solid fa-user-group"></i></span>
-                                    Usuarios
-                                </a>
-                                <a href="#" class="quick-item">
-                                    <span class="quick-icon icon-amber"><i class="fa-solid fa-folder-open"></i></span>
-                                    Caja
-                                </a>
-                                <a href="#" class="quick-item">
-                                    <span class="quick-icon icon-blue"><i class="fa-solid fa-chart-simple"></i></span>
-                                    Reportes
-                                </a>
-                            </div>
-
-                            <div class="alert-banner">
-                                <i class="fa-solid fa-triangle-exclamation"></i>
-                                <span><b>Alertas</b> · 4 productos con stock bajo y 1 agotado requieren tu
-                                    revisión.</span>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-            </main>
         </div>
-
-        <!-- Pie de Página -->
-        <footer class="row footer-dashboard">
-            <p class="text-center mb-0">© 2026 INVENTRA · ING Sistemas</p>
-        </footer>
     </div>
 
-    <script src="../../assets/landing/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.4/chart.umd.min.js"></script>
-    <script src="../../assets/dashboard/js/scripts.js"></script>
-</body>
+    <button class="btn-ayuda" type="button" aria-label="Ayuda">
+        <i class="fa-regular fa-circle-question"></i>
+    </button>
+</div>
 
+<!-- ======================================================
+     VISTA 2: DASHBOARD
+     ====================================================== -->
+<div id="view-dashboard" style="display:none;">
+
+    <nav id="navegador" class="navbar sticky-top navbar-expand-lg bg-body-tertiary position-sticky">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarOffcanvas" aria-controls="sidebarOffcanvas" aria-label="Abrir menú">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand d-flex align-items-center gap-2" href="#">
+                <span class="brand-icon"><i class="fa-solid fa-bolt"></i></span>
+                INVENTRA
+            </a>
+            <div class="d-flex align-items-center gap-3 ms-auto">
+                <button class="btn btn-link icon-btn" type="button" aria-label="Notificaciones">
+                    <i class="fa-regular fa-bell"></i>
+                    <span class="notif-dot"></span>
+                </button>
+                <div class="dropdown">
+                    <a class="d-flex align-items-center gap-2 text-decoration-none dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <span class="user-avatar">AM</span>
+                        <span class="d-none d-sm-inline user-name">Aristides</span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="#">Mi perfil</a></li>
+                        <li><a class="dropdown-item" href="#">Configuración</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#" id="logoutLink">Cerrar sesión</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="dashboard-body">
+
+        <div class="offcanvas-lg offcanvas-start sidebar" tabindex="-1" id="sidebarOffcanvas" aria-labelledby="sidebarOffcanvasLabel">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="sidebarOffcanvasLabel">Menú</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" data-bs-target="#sidebarOffcanvas" aria-label="Cerrar"></button>
+            </div>
+            <div class="offcanvas-body">
+                <nav class="sidebar-nav">
+                    <p class="nav-section-title">Principal</p>
+                    <ul class="nav flex-column">
+                        <li class="nav-item"><a class="nav-link active" href="#"><i class="fa-solid fa-grip"></i> Dashboard</a></li>
+                    </ul>
+                    <p class="nav-section-title">Inventario</p>
+                    <ul class="nav flex-column">
+                        <li class="nav-item"><a class="nav-link" href="#"><i class="fa-solid fa-boxes-stacked"></i> Inventario</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#"><i class="fa-solid fa-arrow-down"></i> Entradas</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#"><i class="fa-solid fa-arrow-up"></i> Salidas</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#"><i class="fa-solid fa-tags"></i> Categorías</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#"><i class="fa-solid fa-truck"></i> Proveedores</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#"><i class="fa-solid fa-chart-column"></i> Reportes</a></li>
+                    </ul>
+                    <p class="nav-section-title">Gestión</p>
+                    <ul class="nav flex-column">
+                        <li class="nav-item"><a class="nav-link" href="#"><i class="fa-solid fa-users"></i> Usuarios</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#"><i class="fa-solid fa-cash-register"></i> Caja</a></li>
+                    </ul>
+                    <p class="nav-section-title">Sistema</p>
+                    <ul class="nav flex-column">
+                        <li class="nav-item"><a class="nav-link" href="#"><i class="fa-solid fa-gear"></i> Configuración</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
+        <main class="dashboard-main">
+
+            <section class="row saludo">
+                <div class="col">
+                    <h2 class="greeting-title">Hola, Aristides <span class="wave">👋</span></h2>
+                    <p class="greeting-sub">Rol: Administrador · <span id="today-date"></span></p>
+                </div>
+                <div class="col-auto d-flex align-items-start gap-2">
+                    <button class="btn btn-outline-action"><i class="fa-solid fa-download"></i> Exportar</button>
+                    <button class="btn btn-primary-action" id="refreshBtn"><i class="fa-solid fa-arrows-rotate"></i> Actualizar</button>
+                </div>
+            </section>
+
+            <section class="row g-3 kpi-row">
+                <div class="col-6 col-xl-3">
+                    <div class="kpi-card">
+                        <div class="kpi-top">
+                            <span class="kpi-label">Valor de Inventario</span>
+                            <span class="kpi-icon icon-green"><i class="fa-solid fa-boxes-packing"></i></span>
+                        </div>
+                        <div class="kpi-value">$ 24.945.000</div>
+                        <div class="kpi-foot">
+                            <span class="kpi-note">8 productos</span>
+                            <span class="kpi-trend trend-up"><i class="fa-solid fa-arrow-trend-up"></i> +8.2%</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-xl-3">
+                    <div class="kpi-card">
+                        <div class="kpi-top">
+                            <span class="kpi-label">Ventas del Día</span>
+                            <span class="kpi-icon icon-blue"><i class="fa-solid fa-cart-shopping"></i></span>
+                        </div>
+                        <div class="kpi-value">$ 2.935.000</div>
+                        <div class="kpi-foot">
+                            <span class="kpi-note">3 transacciones</span>
+                            <span class="kpi-trend trend-up"><i class="fa-solid fa-arrow-trend-up"></i> +12.5%</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-xl-3">
+                    <div class="kpi-card">
+                        <div class="kpi-top">
+                            <span class="kpi-label">Alertas de Stock</span>
+                            <span class="kpi-icon icon-amber"><i class="fa-solid fa-triangle-exclamation"></i></span>
+                        </div>
+                        <div class="kpi-value">4 bajo · 1 agotado</div>
+                        <div class="kpi-foot">
+                            <span class="kpi-note">Requiere atención</span>
+                            <span class="kpi-trend trend-down"><i class="fa-solid fa-arrow-trend-down"></i> Revisar</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-xl-3">
+                    <div class="kpi-card">
+                        <div class="kpi-top">
+                            <span class="kpi-label">Usuarios Activos</span>
+                            <span class="kpi-icon icon-purple"><i class="fa-solid fa-user-group"></i></span>
+                        </div>
+                        <div class="kpi-value">4 / 5</div>
+                        <div class="kpi-foot">
+                            <span class="kpi-note">En línea ahora</span>
+                            <span class="kpi-trend trend-up"><i class="fa-solid fa-arrow-trend-up"></i> Estable</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="row g-3 charts-row">
+                <div class="col-lg-8">
+                    <div class="panel">
+                        <div class="panel-head">
+                            <h3>Ventas vs Compras <span class="dot-sep">·</span> Semana actual</h3>
+                            <span class="currency-badge">COP</span>
+                        </div>
+                        <div class="chart-wrap">
+                            <canvas id="salesChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="panel h-100">
+                        <div class="panel-head"><h3>Stock por Categoría</h3></div>
+                        <div class="pie-wrap"><canvas id="stockChart"></canvas></div>
+                        <ul class="legend-list">
+                            <li><span class="legend-dot" style="background:#22c58b"></span>Tarjetas Gráficas <b>15</b></li>
+                            <li><span class="legend-dot" style="background:#3b82f6"></span>Almacenamiento <b>25</b></li>
+                            <li><span class="legend-dot" style="background:#f59e0b"></span>Periféricos <b>14</b></li>
+                            <li><span class="legend-dot" style="background:#a855f7"></span>Otros <b>8</b></li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section class="row g-3 bottom-row">
+                <div class="col-lg-8">
+                    <div class="panel">
+                        <div class="panel-head">
+                            <h3>Últimas transacciones</h3>
+                            <a href="#" class="see-link">Ver caja <i class="fa-solid fa-chevron-right"></i></a>
+                        </div>
+                        <ul class="txn-list" id="txnList"></ul>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="panel h-100">
+                        <div class="panel-head"><h3>Acceso rápido</h3></div>
+                        <div class="quick-grid">
+                            <a href="#" class="quick-item"><span class="quick-icon icon-green"><i class="fa-solid fa-cube"></i></span>Inventario</a>
+                            <a href="#" class="quick-item"><span class="quick-icon icon-purple"><i class="fa-solid fa-user-group"></i></span>Usuarios</a>
+                            <a href="#" class="quick-item"><span class="quick-icon icon-amber"><i class="fa-solid fa-folder-open"></i></span>Caja</a>
+                            <a href="#" class="quick-item"><span class="quick-icon icon-blue"><i class="fa-solid fa-chart-simple"></i></span>Reportes</a>
+                        </div>
+                        <div class="alert-banner">
+                            <i class="fa-solid fa-triangle-exclamation"></i>
+                            <span><b>Alertas</b> · 4 productos con stock bajo y 1 agotado requieren tu revisión.</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <footer class="row footer-dashboard">
+        <p class="text-center mb-0">© 2026 INVENTRA · ING Sistemas</p>
+    </footer>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.4/chart.umd.min.js"></script>
+<script>
+// ============================================================
+// INVENTRA · Prototipo unificado - lógica
+// ============================================================
+
+let dashboardInicializado = false;
+
+document.addEventListener("DOMContentLoaded", () => {
+    setupTogglePassword();
+    setupDemoAccounts();
+    setupLoginSubmit();
+    setupLogout();
+});
+
+// ---------- LOGIN ----------
+function setupTogglePassword() {
+    const toggleBtn = document.getElementById("togglePass");
+    const passInput = document.getElementById("password");
+    toggleBtn.addEventListener("click", () => {
+        const icon = toggleBtn.querySelector("i");
+        const esOculta = passInput.type === "password";
+        passInput.type = esOculta ? "text" : "password";
+        icon.classList.toggle("fa-eye", !esOculta);
+        icon.classList.toggle("fa-eye-slash", esOculta);
+    });
+}
+
+function setupDemoAccounts() {
+    const emailInput = document.getElementById("email");
+    const passInput = document.getElementById("password");
+    document.querySelectorAll(".demo-item").forEach((btn) => {
+        btn.addEventListener("click", () => {
+            emailInput.value = btn.dataset.email;
+            passInput.value = btn.dataset.password;
+        });
+    });
+}
+
+function setupLoginSubmit() {
+    document.getElementById("loginForm").addEventListener("submit", (e) => {
+        e.preventDefault();
+        mostrarVista("dashboard");
+        if (!dashboardInicializado) {
+            initDashboard();
+            dashboardInicializado = true;
+        }
+    });
+}
+
+function setupLogout() {
+    document.getElementById("logoutLink").addEventListener("click", (e) => {
+        e.preventDefault();
+        document.getElementById("loginForm").reset();
+        mostrarVista("login");
+    });
+}
+
+function mostrarVista(vista) {
+    document.getElementById("view-login").style.display = vista === "login" ? "block" : "none";
+    document.getElementById("view-dashboard").style.display = vista === "dashboard" ? "block" : "none";
+    window.scrollTo(0, 0);
+}
+
+// ---------- DASHBOARD ----------
+function initDashboard() {
+    setTodayDate();
+    renderTransactions();
+    renderSalesChart();
+    renderStockChart();
+    setupRefreshButton();
+}
+
+function setTodayDate() {
+    const el = document.getElementById("today-date");
+    const hoy = new Date();
+    const texto = hoy.toLocaleDateString("es-CO", { weekday: "long", day: "numeric", month: "long", year: "numeric" });
+    el.textContent = texto.charAt(0).toUpperCase() + texto.slice(1);
+}
+
+const transacciones = [
+    { tipo: "in", icono: "fa-arrow-down", titulo: "RTX 4090 — Factura #F-2847", fecha: "22/06/2026 10:14", usuario: "Sebastian Meza", monto: 1890000, codigo: "TXN-0481" },
+    { tipo: "in", icono: "fa-arrow-down", titulo: "Samsung 990 Pro 2TB — Factura #F-2846", fecha: "22/06/2026 09:40", usuario: "Miguel Torres", monto: 485000, codigo: "TXN-0480" },
+    { tipo: "out", icono: "fa-arrow-up", titulo: "Servicios de mensajería — Junio", fecha: "21/06/2026 16:30", usuario: "Aristides Meza", monto: -320000, codigo: "TXN-0479" },
+];
+
+function formatoCOP(valor) {
+    const signo = valor < 0 ? "-" : "+";
+    const absoluto = Math.abs(valor).toLocaleString("es-CO");
+    return `${signo}$ ${absoluto}`;
+}
+
+function renderTransactions() {
+    const lista = document.getElementById("txnList");
+    lista.innerHTML = transacciones.map((t) => {
+        const claseMonto = t.monto >= 0 ? "pos" : "neg";
+        return `
+        <li class="txn-item">
+          <span class="txn-icon ${t.tipo}"><i class="fa-solid ${t.icono}"></i></span>
+          <div class="txn-main">
+            <p class="txn-title">${t.titulo}</p>
+            <p class="txn-sub">${t.fecha} · ${t.usuario}</p>
+          </div>
+          <div class="txn-amounts">
+            <div class="txn-amount ${claseMonto}">${formatoCOP(t.monto)}</div>
+            <div class="txn-code">${t.codigo}</div>
+          </div>
+        </li>`;
+    }).join("");
+}
+
+function renderSalesChart() {
+    const ctx = document.getElementById("salesChart");
+    const dias = ["Lun", "Mar", "Mié", "Jue", "Vie", "Sáb", "Dom"];
+    const compras = [3.0, 3.6, 2.9, 4.4, 5.0, 4.1, 2.4];
+    const ventas = [1.1, 1.3, 1.9, 1.6, 2.1, 1.5, 0.9];
+
+    new Chart(ctx, {
+        type: "line",
+        data: {
+            labels: dias,
+            datasets: [
+                { label: "Compras", data: compras, borderColor: "#22c58b", backgroundColor: "rgba(34,197,139,0.12)", fill: true, tension: 0.45, pointRadius: 0, borderWidth: 2.5 },
+                { label: "Ventas", data: ventas, borderColor: "#3b82f6", backgroundColor: "rgba(59,130,246,0.10)", fill: true, tension: 0.45, pointRadius: 0, borderWidth: 2.5 },
+            ],
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            interaction: { mode: "index", intersect: false },
+            plugins: {
+                legend: { display: false },
+                tooltip: { callbacks: { label: (item) => `${item.dataset.label}: $${item.formattedValue}M` } },
+            },
+            scales: {
+                y: { beginAtZero: true, max: 6, ticks: { stepSize: 1.5, callback: (v) => `${v}M`, color: "#6b7b74", font: { size: 11 } }, grid: { color: "#eef2f0" } },
+                x: { ticks: { color: "#6b7b74", font: { size: 11 } }, grid: { display: false } },
+            },
+        },
+    });
+}
+
+function renderStockChart() {
+    const ctx = document.getElementById("stockChart");
+    new Chart(ctx, {
+        type: "pie",
+        data: {
+            labels: ["Tarjetas Gráficas", "Almacenamiento", "Periféricos", "Otros"],
+            datasets: [{ data: [15, 25, 14, 8], backgroundColor: ["#22c58b", "#3b82f6", "#f59e0b", "#a855f7"], borderWidth: 2, borderColor: "#ffffff" }],
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false }, tooltip: { callbacks: { label: (item) => ` ${item.label}: ${item.parsed} unidades` } } },
+        },
+    });
+}
+
+function setupRefreshButton() {
+    const btn = document.getElementById("refreshBtn");
+    btn.addEventListener("click", () => {
+        btn.disabled = true;
+        const textoOriginal = btn.innerHTML;
+        btn.innerHTML = `<i class="fa-solid fa-arrows-rotate"></i> Actualizando...`;
+        setTimeout(() => {
+            btn.disabled = false;
+            btn.innerHTML = textoOriginal;
+        }, 900);
+    });
+}
+</script>
+</body>
 </html>
